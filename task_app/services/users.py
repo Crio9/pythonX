@@ -1,8 +1,8 @@
 from fastapi import HTTPException, Depends
 
-from task_app.repositories.users import UserRepository
-from task_app.schemas import CreateUserRequest, UserResponse
-from task_app.schemas.users import UpdateUserRequest
+from repositories.users import UserRepository
+from schemas import CreateUserRequest, UserResponse
+from schemas.users import UpdateUserRequest
 
 
 class UserService:
