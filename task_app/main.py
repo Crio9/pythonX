@@ -1,8 +1,17 @@
 from fastapi import FastAPI, Request, Response
 
 from api.v1 import users_router, tasks_router
+from contextlib import asynccontextmanager
 
-app = FastAPI()
+from database import Base, engine
+from models.models import Task
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    Base.metadata.create_all(bind=engine)
+    yield
+
+app = FastAPI(lifespan=lifespan)
 app.include_router(tasks_router)
 app.include_router(users_router)
 
