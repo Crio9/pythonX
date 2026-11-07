@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
-from schemas import CreateUserRequest, UserResponse, TaskIn
-from schemas.users import UpdateUserRequest
-from services.users import UserService
+from task_app.schemas import CreateUserRequest, UserResponse
+from task_app.schemas.users import UpdateUserRequest
+from task_app.services.users import UserService
 
 users = []
 

@@ -1,8 +1,18 @@
-from fastapi import FastAPI, Request, Response
+from contextlib import asynccontextmanager
 
-from api.v1 import users_router, tasks_router
+from fastapi import FastAPI, Request
 
-app = FastAPI()
+from task_app.api.v1 import users_router, tasks_router
+from task_app.database import init_db
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    yield
+
+
+app = FastAPI(title="Task Tracker", lifespan=lifespan)
 app.include_router(tasks_router)
 app.include_router(users_router)
 
